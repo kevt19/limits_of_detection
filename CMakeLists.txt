@@ -1,13 +1,23 @@
+# Specify the minimum version of CMake
 cmake_minimum_required(VERSION 3.10)
 
 # Set the project name
-project(MathLib)
+project(LimitsOfDetection)
 
-# Add the library
-add_library(mathlib STATIC mathlib.cpp)
+# Specify the C++ standard
+set(CMAKE_CXX_STANDARD 17)
 
-# Specify include directories
-target_include_directories(mathlib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+# Include directories
+include_directories(include)
 
-# Optionally, specify C++ standard
-set_target_properties(mathlib PROPERTIES CXX_STANDARD 17)
+# Find Boost libraries
+find_package(Boost REQUIRED)
+
+# Add the executable
+add_executable(limits_of_detection 
+    src/limits_of_detection.cpp 
+    src/example_1.cpp
+)
+
+# Link Boost libraries (e.g., math)
+target_link_libraries(limits_of_detection ${Boost_LIBRARIES})
